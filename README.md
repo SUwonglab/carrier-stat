@@ -23,6 +23,7 @@ where the inputs are
 ### A concrete example
 ```
 cd carrier-stat
+
 Rscript ./step1_carrier_stat.R \
 --genotype=./example/genotype \
 --variants=./example/variants \
@@ -64,6 +65,7 @@ where the inputs are
 ### A concrete example
 ```
 cd carrier-stat
+
 Rscript ./step2_analysis.R \
 --carrier_stat=./example/carrier_stat \
 --outfile=./example/carrier_stat \
