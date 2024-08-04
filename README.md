@@ -22,36 +22,23 @@ where the inputs are
 * `OUTFILE_PREFIX` (required): The prefix for output carrier statistic files. Two files will be generated, `OUTFILE_PREFIX_case.txt` for case group and `OUTFILE_PREFIX_ctrl.txt` for control group.
 
 ### A concrete example
-```bash
-#!/bin/bash
-## ---- Download the required reference panel and example data for LOGODetect ---- ##
-wget ftp://ftp.biostat.wisc.edu/pub/lu_group/Projects/LOGODetect/LOGODetect_data.tar.gz
-tar -zxvf LOGODetect_data.tar.gz
-rm -rf LOGODetect_data.tar.gz
-
-
-## ---- Applying LOGODetect ---- ##
-cd LOGODetect_data
-
-mkdir ./results
-
-conda activate ldsc
-
-Rscript /LOGODetect/LOGODetect.R \
---sumstats ./sumstats/BIP.txt,./sumstats/SCZ.txt \
---n_gwas 51710,105318 \
---ref_dir ./LOGODetect_1kg_ref \
---pop EUR \
---ldsc_dir /LOGODetect/ldsc \
---block_partition /LOGODetect/block_partition.txt \
---out_dir ./results \
---n_cores 25
-
-conda deactivate
-
+```
+cd carrier-stat
+Rscript ./step1_carrier_stat.R \
+--genotype=./example/genotype \
+--variants=./example/variants \
+--rna=./example/rna \
+--gene=./example/gene.txt \
+--variants_gene_pair=./example/variants_gene_pair.txt \
+--outfile=./example/carrier_stat
 ```
 
-### Output
+### Input format
+
+
+
+
+### Output format
 LOGODetect outputs a whitespace-delimited text file `LOGODetect_regions.txt` in `PATH_TO_OUTFILE` specified by the user, with each row representing one small segment and the columns as such:
 * `chr`: The chromosome. 
 * `begin_pos`: The starting position of this detected small region.
