@@ -1,10 +1,9 @@
 # Carrier statistic
 Carrier statistic is a statistical framework to prioritize disease-related rare variants by integrating gene expression data.
 
-### Step1. Computing carrier statistic
-
+## Step1. Computing carrier statistic
 ```
-Rscript /step1_carrier_stat.R \
+Rscript step1_carrier_stat.R \
 --genotype=GENOTYPE_PREFIX \
 --variants=VARIANTS_PREFIX \
 --rna=RNA_PREFIX \
@@ -46,5 +45,34 @@ Variant-gene-pair information file (`VARIANTS_GENE_PAIR_FILE`): A text file with
 
 ### Output format
 Output carrier statistic file (`OUTFILE_PREFIX_case.txt` and `OUTFILE_PREFIX_ctrl.txt`): A text file with a header line (CHROM: chromosome; POS: position; ID: variant name; REF: reference allele; ALT: alternative allele; GENE: gene name; n_carrier: number of samples carrying the variant; carrier_stat: carrier statistic value). 
+
+
+
+## Step2. Prioritize rare variant-gene pairs with extreme carrier statistic
+```
+Rscript step2_analysis.R \
+--carrier_stat=CARRIER_STAT_PREFIX \
+--outfile=OUTFILE_PREFIX \
+--fdr_thre=FDR_THRESHOLD
+```
+where the inputs are
+
+* `CARRIER_STAT_PREFIX` (required): The prefix for carrier statistic files output from Step 1. This prefix should correspond to `CARRIER_STAT_PREFIX_case.txt` for case group and `CARRIER_STAT_PREFIX_ctrl.txt` for control group.
+* `OUTFILE_PREFIX` (required): The prefix for files containing significant variant-gene pairs. Two files will be generated, `OUTFILE_PREFIX_downregulated_fdr_FDR_THRESHOLD.txt` for significant variant-gene pairs with negative carrier statistics and `OUTFILE_PREFIX_upregulated_fdr_FDR_THRESHOLD.txt` for significant variant-gene pairs with positive carrier statistics.
+* `FDR_THRESHOLD` (optional): FDR cutoff. Default is 0.05.
+
+### A concrete example
+```
+cd carrier-stat
+Rscript ./step2_analysis.R \
+--carrier_stat=./example/carrier_stat \
+--outfile=./example/carrier_stat \
+--fdr_thre=0.2
+```
+
+### Output format
+Output files containing significant variant-gene pairs (`OUTFILE_PREFIX_downregulated_fdr_FDR_THRESHOLD.txt` and `OUTFILE_PREFIX_upregulated_fdr_FDR_THRESHOLD.txt`): A text file with a header line (CHROM: chromosome; POS: position; ID: variant name; REF: reference allele; ALT: alternative allele; GENE: gene name; n_carrier: number of samples carrying the variant; carrier_stat: carrier statistic value; fdr: FDR). 
+
+
 
 
