@@ -3,12 +3,13 @@ library(optparse)
 options(stringsAsFactors = F)
 option_list = list(
   make_option('--carrier_stat', action = 'store', default = NA, type = 'character'), 
-  make_option('--outfile', action = 'store', default = NA, type = 'character')
+  make_option('--outfile', action = 'store', default = NA, type = 'character'),
+  make_option('--fdr_thre', action = 'store', default = 0.05, type = 'numeric')
 )
 opt = parse_args(OptionParser(option_list=option_list))
 carrier_stat_prefix = opt$carrier_stat
 outfile_prefix = opt$outfile
-fdr_thre = 0.2
+fdr_thre = opt$fdr_thre
 
 stat_case = data.frame(fread(paste0(carrier_stat_prefix, '_case.txt')))
 stat_case = stat_case[order(stat_case$carrier_stat), ]
