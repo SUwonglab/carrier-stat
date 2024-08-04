@@ -34,18 +34,17 @@ Rscript ./step1_carrier_stat.R \
 ```
 
 ### Input format
+Genotype file (`GENOTYPE_PREFIX_case.txt` and `GENOTYPE_PREFIX_ctrl.txt`): Allelic dosage file (number of ALT alleles, only 0/1/2 are supported) without a header line, one row per sample and one column per variant. The number of columns (i.e., the number of variants) must be equal to the number of rows in the variant information file. The number of rows (i.e., the number of samples) must be equal to the number of columns in the gene expression data file. 
 
+Variant information file (`VARIANTS_PREFIX_case.txt` and `VARIANTS_PREFIX_case.txt`): A text file with a header line (CHROM: chromosome; POS: position; ID: variant name; REF: reference allele; ALT: alternative allele). The number of rows (i.e., the number of variants) must be equal to the number of columns in the genotype file. 
 
+Gene expression data file (`RNA_PREFIX_case.txt` and `RNA_PREFIX_ctrl.txt`): RNA reads count file without a header line, one row per gene and one column per sample. The number of columns (i.e., the number of samples) must be equal to the number of rows in the genotype file. The number of rows (i.e., the number of genes) must be equal to the number of rows in the gene information file. 
 
+Gene information file (`GENE_FILE`): A text file with a header line (CHROM: chromosome; MINBP: start position of the gene; MAXBP: end position of the gene; GENE: gene name). The number of rows (i.e., the number of genes) must be equal to the number of rows in the gene expression data file.
+
+Variant-gene-pair information file (`VARIANTS_GENE_PAIR_FILE`): A text file with a header line (CHROM: chromosome; POS: position; ID: variant name; REF: reference allele; ALT: alternative allele; GENE: gene name). 
 
 ### Output format
-LOGODetect outputs a whitespace-delimited text file `LOGODetect_regions.txt` in `PATH_TO_OUTFILE` specified by the user, with each row representing one small segment and the columns as such:
-* `chr`: The chromosome. 
-* `begin_pos`: The starting position of this detected small region.
-* `stop_pos`: The stopping position of this detected small region.
-* `stat`: The scan statistic value. Positive value means positive local genetic correlation between two traits. 
-* `pval`: The p-value of this detected small region.
-* `pval_adj`: The adjusted p-value of this detected small region.
+Output carrier statistic file (`OUTFILE_PREFIX_case.txt` and `OUTFILE_PREFIX_ctrl.txt`): A text file with a header line (CHROM: chromosome; POS: position; ID: variant name; REF: reference allele; ALT: alternative allele; GENE: gene name; n_carrier: number of samples carrying the variant; carrier_stat: carrier statistic value). 
 
-We have prepared the example output file for you in `/LOGODetect_data/results/LOGODetect_regions.txt`. 
 
