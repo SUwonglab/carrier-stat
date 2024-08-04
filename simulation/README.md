@@ -1,36 +1,54 @@
-# Carrier statistic
-Carrier statistic is a statistical framework to prioritize disease-related rare variants by integrating gene expression data.
+# Simulate data
 
-## Step1. Computing carrier statistic
 ```
-Rscript step1_carrier_stat.R \
---genotype=GENOTYPE_PREFIX \
---variants=VARIANTS_PREFIX \
---rna=RNA_PREFIX \
+Rscript simulate_data.R \
 --gene=GENE_FILE \
+--variants=VARIANTS_FILE \
 --variants_gene_pair=VARIANTS_GENE_PAIR_FILE \
+--n_gene=N_GENE \
+--n_variant=N_VARIANT \
+--p_carrier=P_CARRIER \
+--p_noncarrier=P_NONCARRIER \
+--z=Z \
+--n_case=N_CASE \
+--n_ctrl=N_CTRL \
 --outfile=OUTFILE_PREFIX
+
 ```
 where the inputs are
 
 * `GENOTYPE_PREFIX` (required): The prefix for genotype files. This prefix should correspond to `GENOTYPE_PREFIX_case.txt` for case group and `GENOTYPE_PREFIX_ctrl.txt` for control group.
 * `VARIANTS_PREFIX` (required): The prefix for variant information files accompanying the genotype files. This prefix should correspond to `VARIANTS_PREFIX_case.txt` for case group and `VARIANTS_PREFIX_ctrl.txt` for control group.
 * `RNA_PREFIX` (required): The prefix for gene expression data files. This prefix should correspond to `RNA_PREFIX_case.txt` for case group and `RNA_PREFIX_ctrl.txt` for control group.
-* `GENE_FILE` (required): The full path to the gene information file accompanying the gene expression data files.
-* `VARIANTS_GENE_PAIR_FILE` (required): The full path to the variant-gene-pair information file.
-* `OUTFILE_PREFIX` (required): The prefix for output carrier statistic files. Two files will be generated, `OUTFILE_PREFIX_case.txt` for case group and `OUTFILE_PREFIX_ctrl.txt` for control group.
+
+* `GENE_FILE` (required): The full path to the gene information file.
+* `VARIANTS_FILE` (required): The full path to the variants information file.
+* `VARIANTS_GENE_PAIR_FILE` (required): The full path to the variants-gene pair information file.
+* `N_GENE` (required): The number of causal genes.
+* `N_VARIANT` (required): The number of causal variants per causal gene.
+* `P_CARRIER` (required): The penetrance of causal variants.
+* `P_NONCARRIER` (required): The prevalence in causal variants noncarriers.
+* `Z` (required): Gene expression perturbation level for causal variants.
+* `N_CASE` (required): The number of simulated cases.
+* `N_CTRL` (required): The number of simulated controls.
+* `OUTFILE_PREFIX` (required): The folder name for simulated data. 
 
 ### A concrete example
 ```
-cd carrier-stat
+cd carrier-stat/simulation
 
-Rscript ./step1_carrier_stat.R \
---genotype=./example/genotype \
---variants=./example/variants \
---rna=./example/rna \
---gene=./example/gene.txt \
---variants_gene_pair=./example/variants_gene_pair.txt \
---outfile=./example/carrier_stat
+Rscript ./simulate_data.R \
+--gene=./gene_all.txt \
+--variants=./variants_all.txt \
+--variants_gene_pair=./variants_gene_pair.txt \
+--n_gene=10 \
+--n_variant=5 \
+--p_carrier=0.7 \
+--p_noncarrier=0.01 \
+--z=5 \
+--n_case=500 \
+--n_ctrl=500 \
+--outfile=./sim
 ```
 
 ### Input format

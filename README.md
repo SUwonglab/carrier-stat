@@ -42,7 +42,7 @@ Gene expression data file (`RNA_PREFIX_case.txt` and `RNA_PREFIX_ctrl.txt`): RNA
 
 Gene information file (`GENE_FILE`): A text file with a header line (CHROM: chromosome; MINBP: start position of the gene; MAXBP: end position of the gene; GENE: gene name). The number of rows (i.e., the number of genes) must be equal to the number of rows in the gene expression data file.
 
-Variant-gene-pair information file (`VARIANTS_GENE_PAIR_FILE`): A text file with a header line (CHROM: chromosome; POS: position; ID: variant name; REF: reference allele; ALT: alternative allele; GENE: gene name). 
+Variant-gene pair information file (`VARIANTS_GENE_PAIR_FILE`): A text file with a header line (CHROM: chromosome; POS: position; ID: variant name; REF: reference allele; ALT: alternative allele; GENE: gene name). 
 
 ### Output format
 Output carrier statistic file (`OUTFILE_PREFIX_case.txt` and `OUTFILE_PREFIX_ctrl.txt`): A text file with a header line (CHROM: chromosome; POS: position; ID: variant name; REF: reference allele; ALT: alternative allele; GENE: gene name; n_carrier: number of samples carrying the variant; carrier_stat: carrier statistic value). 
