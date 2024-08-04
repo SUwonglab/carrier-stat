@@ -17,7 +17,7 @@ where the inputs are
 * `VARIANTS_PREFIX` (required): The prefix for variant information files accompanying the genotype files. This prefix should correspond to `VARIANTS_PREFIX_case.txt` for case group and `VARIANTS_PREFIX_ctrl.txt` for control group.
 * `RNA_PREFIX` (required): The prefix for gene expression data files. This prefix should correspond to `RNA_PREFIX_case.txt` for case group and `RNA_PREFIX_ctrl.txt` for control group.
 * `GENE_FILE` (required): The full path to the gene information file accompanying the gene expression data files.
-* `VARIANTS_GENE_PAIR_FILE` (required): The full path to the variant-gene-pair information file.
+* `VARIANTS_GENE_PAIR_FILE` (required): The full path to the variant-gene pair information file.
 * `OUTFILE_PREFIX` (required): The prefix for output carrier statistic files. Two files will be generated, `OUTFILE_PREFIX_case.txt` for case group and `OUTFILE_PREFIX_ctrl.txt` for control group.
 
 ### A concrete example
